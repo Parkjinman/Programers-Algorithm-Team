@@ -1,0 +1,41 @@
+class Solution {
+    public String[] solution(int n, int[] arr1, int[] arr2) {
+        String[] answer = new String[n];
+		int[] result = new int[n];
+		int[] res = new int[n];
+		int[] resSub = new int[n];
+		int cnt = 0;
+
+		for(int k = 0; k < n; k++) {
+			answer[k] = "";
+
+			for (int i = n-1; i >= 0; i--) {
+				res[i] = arr1[cnt] % 2;
+				arr1[cnt] = arr1[cnt] / 2;
+
+				resSub[i] = arr2[cnt] % 2;
+				arr2[cnt] = arr2[cnt] / 2;
+			}
+
+			for (int i = 0; i < n; i++) {
+				if (res[i] + resSub[i] != 2) {
+					result[i] = res[i] + resSub[i];
+				} else {
+					result[i] = 1;
+				}
+			}
+
+			for (int i = 0; i < n; i++) {
+				if(result[i] == 1) {
+					answer[k] += "#";
+				} else {
+					answer[k] += " ";
+				}
+			}
+
+			cnt++;
+		}
+
+		return answer;
+    }
+}

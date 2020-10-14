@@ -1,0 +1,17 @@
+class Solution {
+    public String solution(String phone_number) {
+        String answer = "";
+		int phoneLength = phone_number.length()-4;
+		int i=0;
+		
+		while(i < phoneLength) {
+			answer+= "*";
+			
+			i++;
+		}
+		
+		answer += phone_number.substring(phone_number.length()-4, phone_number.length());
+		
+  		return answer;
+    }
+}
