@@ -1,0 +1,42 @@
+class Solution {
+    public String solution(String s, int n) {
+        String answer = "";
+        String[] all = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+        String[] sLength = new String[s.length()];
+        String emp = "";
+        
+        for(int i=0; i < sLength.length; i++) {
+        	emp = Character.toString(s.charAt(i));
+        	
+        	System.out.println(i+n);
+        	
+        	for(int j=0; j<all.length; j++) {
+        		
+	        	if(emp.equals(all[j])) {
+	        		
+	        		if(j+n >= all.length) {
+	        			answer += all[n - all.length + j];
+	        		} else {
+	        			answer += all[j + n];
+	        		}
+	        		
+	        	} else if(emp.equals(all[j].toLowerCase())) { //소문자인 경우
+	        		
+	        		if(j+n >= all.length) {
+	        			answer += all[n - all.length + j].toLowerCase();
+	        		} else {
+	        			answer += all[j + n].toLowerCase();
+	        		}
+	        		
+	        	}
+	        	
+        	}
+            
+            if(emp.equals(" ")) {
+                answer += " ";
+            }
+        }
+        
+        return answer;
+    }
+}
