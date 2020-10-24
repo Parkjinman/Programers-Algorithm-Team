@@ -1,0 +1,91 @@
+class Solution {
+    public String solution(int[] numbers, String hand) {
+        String answer = "";
+        
+        //각 손의 현재 좌표
+        int[] LP = new int[2];
+        int[] RP = new int[2];
+        int[] now = new int[2];
+        
+        //키패드 전체
+        int[][] numPosition = {{1, 2, 3},
+        		              {4, 5, 6},
+        		              {7, 8, 9},
+        		             {'*',0,'#'}};
+        //오른손 및 왼손 위치
+        int handLeft = '*';
+        int handRight= '#';
+        
+        //각 엄지손가락이 현재눌러야할 번호까지의 거리
+        int StreetL = 0;
+        int StreetR = 0;
+        
+        
+        
+        for(int i=0; i<numbers.length; i++) {
+        	//왼손인 경우
+        	if(numbers[i] == 1 || numbers[i] == 4 || numbers[i] == 7) {
+        		handLeft = numbers[i];
+        		answer += "L";
+        	//오른손인 경우
+        	} else if(numbers[i] == 3 || numbers[i] == 6 || numbers[i] == 9) {
+        		handRight = numbers[i];
+        		answer += "R";
+    		//number값이 2,5,8,0 인 경우
+        	} else {
+        		for(int j=0; j<numPosition.length; j++) {
+        			for(int k=0; k<numPosition[j].length; k++) {
+        				//왼손의 현재위치
+        				if(handLeft == numPosition[j][k]) {
+        					LP[0] = j;
+        					LP[1] = k;
+        				}
+        				//오른손의 현재위치
+        				if(handRight == numPosition[j][k]) {
+        					RP[0] = j;
+        					RP[1] = k;
+        				}
+        				//눌러야할 번호
+        				if(numbers[i] == numPosition[j][k]) {
+        					now[0] = j;
+        					now[1] = k;
+        				}
+        				//거리계산
+        				StreetL = getPosition(LP, now);
+        				StreetR = getPosition(RP, now);
+        			}
+        		}
+        		
+		//거리 계산 후 어느 손으로 누를지 결정
+        		if(StreetL > StreetR) {
+        			handRight = numbers[i];
+        			answer += "R";
+        		} else if(StreetL < StreetR) {
+        			handLeft = numbers[i];
+        			answer += "L";
+        		} else if(StreetL == StreetR) {
+        			if(hand.equals("right")) {
+        				handRight = numbers[i];
+            			answer += "R";
+        			} else {
+        				handLeft = numbers[i];
+            			answer += "L";
+        			}
+        		}
+        	}
+        }
+        
+        return answer;
+    }
+    
+    //거리 구하는 함수
+    public static int getPosition(int[] a, int[] b) {
+	    int sum = 0;
+	    
+	    for(int i = 0; i < a.length; i++) {
+	        sum += Math.abs(a[i]-b[i]);
+	    }
+	        
+	    return sum;
+	}
+}
