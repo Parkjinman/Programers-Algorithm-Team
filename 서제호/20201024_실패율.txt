@@ -1,0 +1,76 @@
+package main;
+
+public class Test1 {
+	public static void main(String[] args) {
+		// 3진법
+		int N = 8;
+	      int[] stages = {1,2,3,4,5,6,7};
+		int[] answer = {};
+		answer = new int[N];
+		
+		int temp1 = 0;
+		int temp2 = 0;
+		int num = 1;
+		int row = 0;
+		int high = 0;
+		int[] bi;
+		bi = new int[N];
+		
+		while(true) {
+			for(int i=1; i<stages.length+1; i++) {
+				// row = 실패율의 분모를 구하기 위한 변수
+				if(num <= stages[i-1]) {
+					row++;
+				}
+				// high = 실패율의 분자를 구하기 위한 변수
+				if(num == stages[i-1]) {
+					high++;
+				}
+			}
+			// ex) 사람들이 전부 4단계에 머물러있고 5단계의 실패율을 구한다고 할때 zero에러를 방지하기위해
+			if(row == 0){
+				bi[num-1] = 0;
+                answer[num-1] = num;
+                System.out.println( num + "은 :" + bi[num-1]);
+                high = 0;
+                num++;
+            // 분자율 구하기(*200000을 한 이유는 int에는 소수점이 안들어가서), 변수들 초기화
+            }else{
+                bi[num-1] = (high*200000 / row);
+                System.out.println( num + "은 :" + bi[num-1]);
+                answer[num-1] = num;
+                row = 0;
+                high = 0;
+                num++;
+            }
+			if(num>N) {
+				break;
+			}
+		}
+		for(int i=0; i<bi.length; i++) {
+			for(int j=0; j<bi.length-1; j++) {
+				if (bi[j] < bi[j+1]) {
+					// 2차원 배열로 하는 것보다 이게 더 효율적인것 같아서
+					// bi[]를 정렬해줌과 동시에 answer[]를 같이 정렬해줌
+					temp1 = bi[j];
+					bi[j] =bi[j+1];
+					bi[j+1] = temp1;
+					
+					
+					temp2 = answer[j];
+					answer[j] =answer[j+1];
+					answer[j+1] = temp2;
+				}
+			}
+		}
+		
+		for(int i=0; i<answer.length; i++) {
+			System.out.println(answer[i]);
+		}
+		// 일단 스테이지가 몇까지 갔는지 확인하고
+		
+		
+		
+		
+   }
+}
