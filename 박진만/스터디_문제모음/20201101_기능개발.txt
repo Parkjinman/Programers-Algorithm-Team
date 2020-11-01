@@ -1,0 +1,69 @@
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
+class Solution {
+    public int[] solution(int[] progresses, int[] speeds) {
+        int pLength = progresses.length;
+		
+		int[] current = new int[pLength]; //남은 진도율
+		int[] leftDays = new int[pLength]; //남은 일수
+		
+		Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+		
+		//남은 진도율 구하기. 100% - 현재 진도율
+		for(int i=0; i<pLength; i++) {
+			current[i] = 100 - progresses[i];
+		}
+		
+		int cnt = 0;
+		
+		//남은 진도율까지 걸리는 기간
+		while(true) {
+			current[cnt] = current[cnt] - speeds[cnt];
+			leftDays[cnt]++;
+			
+			if(current[cnt] <= 0) {
+				cnt++;
+			}
+			
+			if(cnt == pLength) {
+				break;
+			}
+		}
+		
+		//남은 기간에 따른 동시에 끝나는 작업종료 날짜 동일하게 맞추기 ex) 7 7 9
+		for(int i=0; i<leftDays.length; i++) {
+			if(i != 0 && leftDays[i-1] > leftDays[i]) {
+				leftDays[i] = leftDays[i-1];
+			}
+		}
+		
+		//중복 개수 세기
+		for(int i=0; i<leftDays.length; i++) {
+			map.put(String.valueOf(leftDays[i]), map.getOrDefault(String.valueOf(leftDays[i]), 0)+1);
+		}
+		
+		int[] answer = new int[map.size()];
+		
+		printResult(map, answer);
+		
+  		return answer;
+    }
+    
+    public static void printResult(Map<String, Integer> map, int[] answer) {
+		Set<String> set = map.keySet();
+		Iterator<String> iter = set.iterator();
+		int cnt = 0;
+		
+        //map을 순서대로 answer 배열에 담는 함수
+		while(iter.hasNext()) {
+			String key = ((String)iter.next());
+			int value = map.get(key);
+			
+			answer[cnt] = value;
+			cnt++;
+		}
+	}
+}
