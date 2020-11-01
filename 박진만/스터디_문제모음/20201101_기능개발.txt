@@ -52,12 +52,12 @@ class Solution {
   		return answer;
     }
     
+    //map을 순서대로 answer 배열에 담는 함수
     public static void printResult(Map<String, Integer> map, int[] answer) {
 		Set<String> set = map.keySet();
 		Iterator<String> iter = set.iterator();
 		int cnt = 0;
 		
-        //map을 순서대로 answer 배열에 담는 함수
 		while(iter.hasNext()) {
 			String key = ((String)iter.next());
 			int value = map.get(key);
