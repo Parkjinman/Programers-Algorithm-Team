@@ -1,0 +1,26 @@
+class Solution {
+    public int[] solution(int[] prices) {
+        //자주사용하기 때문에 변수설정
+		int pLength = prices.length;
+		int[] answer = new int[pLength];
+
+		//prices배열의 처음부터 끝까지 반복
+		for(int i=0; i<pLength; i++) {
+			int cnt = 0;
+			
+			//이미 비교한 값은 제외
+			for(int j=i+1; j<pLength; j++) {
+				cnt++;
+				
+				//가격이 떨어진 시점에서 멈춤
+				if(prices[i] > prices[j]) {
+					break;
+				}
+			}
+			//한번도 떨어지지 않았던 개수 저장
+			answer[i] = cnt;
+		}
+		
+		return answer;
+    }
+}
