@@ -1,0 +1,28 @@
+class Solution {
+    boolean solution(String s) {
+        boolean answer = true;
+		
+		int p = 0;
+		int y = 0;
+		
+		//문자열 길이만큼 반복
+		for(int i=0; i<s.length(); i++) {
+			//현재 문자가 대소문자 구분없이 p인지 y인지
+			if(String.valueOf(s.charAt(i)).equalsIgnoreCase("p")) {
+				p++;
+			} else if(String.valueOf(s.charAt(i)).equalsIgnoreCase("y")) {
+				y++;
+			}
+		}
+		
+		//p와 y의 개수 체크
+		if(p == y) {
+			answer = true;
+		} else {
+			answer = false;
+		}
+		
+		
+		return answer;
+    }
+}
