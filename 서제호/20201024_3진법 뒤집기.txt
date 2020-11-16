@@ -2,7 +2,6 @@ package main;
 
 public class Test1 {
 	public static void main(String[] args) {
-		 3진법
 		int n = 45;
 		int answer = 0;
 		
@@ -11,17 +10,12 @@ public class Test1 {
 		
 		
 		while(true) {
-			 n이 0보다 클때
 			if(n0) {
-				 %3을 주면 3보다 작은 나머지 값이 나오는데 가장 작을때부터 차례대로 나옴
-				num += n%3 + ;
-				 n을 3으로 나누고 그 다음 자리수 계산을 위함
-				n = n3;
 			}else {
 				break;
 			}
 		}
-		 count에 자리수-1를 해줘야 3의 배수만큼 더해줄 수 있음 (마지막자리수는 그대로 더하기 할것이기 때문)(Math.pow의 3의 0 은 1임)
+		// count에 자리수-1를 해줘야 3의 배수만큼 더해줄 수 있음 (마지막자리수는 그대로 더하기 할것이기 때문)(Math.pow의 3의 0 은 1임)
 		count = num.length()-1;
 		for(int i=0; inum.length(); i++) {
 			answer += Character.getNumericValue(num.charAt(i))  Math.pow(3,count);

@@ -1,0 +1,49 @@
+import java.util.Arrays;
+
+public class programmers {
+
+	public static void main(String[] args) {
+		String[] answer = new String[3];
+//		String[] answer = new String[strings.length]; 
+		answer[0] = "abce";
+		answer[1] = "abcd";
+		answer[2] = "cdx";
+		int n = 1;
+		
+		// answer에 입력되는 문자열 기입
+//		for(int i=0; i<strings.length; i++){
+//            answer[i] = strings[i];
+//        }
+		
+        //사전상 앞에오는 단어들을 먼저 정렬
+        Arrays.sort(answer);
+		
+        // answer2라는 새로운 정렬조건을 생성
+		int[] answer2 = new int[answer.length];
+		
+		// answer2에 각각의 단어들의 아스키코드번호를 입력
+		for(int i=0; i<answer.length; i++) {
+			answer2[i] = (int)answer[i].charAt(n);
+			System.out.println(answer[i].charAt(n) +"와" + answer2[i]);
+		}
+		
+		//정렬하기위한 변수들 선언
+		int temp = 0;
+		String temp2 = "";
+		
+		//아스키코드 숫자기준으로 정렬(버블정렬)
+		for(int i=0; i<answer.length; i++) {
+			for(int j=0; j<answer2.length-1; j++) {
+				if(answer2[j] > answer2[j+1]) {
+					temp = answer2[j];
+					answer2[j] = answer2[j+1];
+					answer2[j+1] = temp;
+
+					temp2 = answer[j];
+					answer[j] = answer[j+1];
+					answer[j+1] = temp2;
+				}
+			}
+		}
+	}
+}

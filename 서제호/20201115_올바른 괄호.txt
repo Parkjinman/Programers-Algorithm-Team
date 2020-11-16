@@ -1,0 +1,29 @@
+package programmers;
+
+public class Test2 {
+
+	public static void main(String[] args) {
+		String s = "()()";
+		int check = 0;
+		boolean answer = true;
+
+		for (int i = 0; i < s.length(); i++) {
+			if (s.substring(i, i + 1).contains("(")) {
+				check++;
+			} else {
+				check--;
+			}
+			// 0보다 작다는 거는 이미 (가 너무많이 나와서 망했기에 for문 강제종료
+			if(check<0) {
+				break;
+			}
+		}
+		// 정상적으로 돌았을 때 check의 값으로 체크
+        if(check == 0){
+            answer = true;
+        }else{
+            answer = false;
+        }
+	}
+
+}

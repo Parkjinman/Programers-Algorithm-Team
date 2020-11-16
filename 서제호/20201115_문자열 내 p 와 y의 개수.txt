@@ -1,0 +1,31 @@
+package programmers;
+
+public class Test1 {
+
+	public static void main(String[] args) {
+		String s = "pPp";
+		boolean answer = true;
+		int pcount = 0;
+		int ycount= 0;
+		
+		
+		//각각 문자열을 잘라서 p,P를 갖고있으면 pcount증가 y,Y를 가지고있으면 ycount 증가
+		for(int i=0; i<s.length(); i++) {
+			if(s.substring(i,i+1).contains("p") || s.substring(i,i+1).contains("P")) {
+				pcount++;
+			}
+			if(s.substring(i,i+1).contains("y") || s.substring(i,i+1).contains("Y")) {
+				ycount++;
+			}
+		}
+		// 값이 같으면 (0,0)포함 ture, 틀리면 flase
+		if(pcount == ycount){
+            answer = true;
+        }else{
+            answer = false;
+        }
+		System.out.println(answer);
+		
+	}
+
+}
