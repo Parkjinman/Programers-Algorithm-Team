@@ -1,0 +1,31 @@
+import java.util.HashMap;
+
+class Solution {
+    public int solution(String[][] clothes) {
+        int answer = 1; 
+
+    	HashMap<String, Integer> map = new HashMap<>();
+    	
+    	//아래 공식을 적용하기 위한 세팅
+    	for(int i = 0; i < clothes.length; i++) {
+    		//처음 새는 옷을 맵에 저장후 +1
+    		if(map.get(clothes[i][1]) == null) {
+    			map.put(clothes[i][1], 1);
+    			
+			//map에 있는 옷을 같은종류면 +1쌓음
+    		} else {
+    			map.put(clothes[i][1], map.get(clothes[i][1]) + 1);
+    		}
+    	}
+    	
+    	// (n+1)(m+1)ㆍㆍㆍ-1  공식적용 
+    	for(String keys: map.keySet()) {
+    		answer *= (map.get(keys) + 1);
+    	}
+        
+    	//아무것도 안입을 경우
+    	answer -= 1;
+        
+        return answer;
+    }
+}

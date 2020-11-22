@@ -1,0 +1,22 @@
+class Solution {
+    public String solution(String[] seoul) {
+        String answer = "";
+		int sLength = seoul.length;
+		int curPost = 0;
+		
+        //배열 seoul의 담긴 개수만큼 반복
+		for(int i=0; i<sLength; i++) {
+            
+            //김서방 찾기
+			if("Kim".equals(seoul[i])) {
+                //현재위치 저장
+				curPost = i;
+			}
+		}
+		
+        //문장 만들기
+		answer = "김서방은 "+curPost+"에 있다";
+		
+		return answer;
+    }
+}
