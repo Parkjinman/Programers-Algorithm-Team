@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+
+class Solution {
+    public int[] solution(int[] answers) {
+        int[] answer = null;
+		int[] first = {1,2,3,4,5};
+		int[] second = {2,1,2,3,2,4,2,5};
+		int[] third = {3,3,1,1,2,2,4,4,5,5};
+		int cnt1 = 0;
+		int cnt2 = 0;
+		int cnt3 = 0;
+		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		
+		//3명의 정답개수 구하기
+		for(int i=0; i<answers.length; i++) {
+			if(answers[i] == first[i%first.length]) {
+				cnt1++;
+			}
+			
+			if(answers[i] == second[i%second.length]) {
+				cnt2++;
+			}
+			
+			if(answers[i] == third[i%third.length]) {
+				cnt3++;
+			}
+		}
+		
+		//각각 정답맞춘 개수의 최대값 구하기
+		int max = Math.max(Math.max(cnt1, cnt2),cnt3);
+		
+		//가장큰 개수가 여러명인지 확인하기
+		if(max==cnt1) {
+			arr.add(1);
+		}
+		
+		if(max==cnt2) {
+			arr.add(2);
+		}
+		
+		if(max==cnt3) {
+			arr.add(3);
+		}
+		
+		//가장큰 개수 answer에 담기
+		answer = new int[arr.size()];
+		
+		for(int i=0; i<answer.length;i++) {
+			answer[i] = arr.get(i);
+		}
+		
+		return answer;
+    }
+}
