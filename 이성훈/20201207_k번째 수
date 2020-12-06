@@ -1,0 +1,18 @@
+#https://programmers.co.kr/learn/courses/30/lessons/42748#
+#k번째 수 이성훈 풀이
+def solution(array, commands):
+    tmparr = []                      #슬라이싱 후 넣을 배열 선언
+    first = 0                        # first = commands의 첫번째 값
+    second = 0                       # 두번째 값
+    third = 0                        # 세번째 값
+    answer = []
+    for i in range(len(commands)):    #여기다 최초 제공값이 3을 넣었다가 채점에서 계속 실패했었습니다 ㅠ
+        # print(commands[i])
+        first = commands[i][0] -1   # 사람이 인식하는 값(1부터)과 배열이 인식하는 값(0부터) 차이 
+        second = commands[i][1]
+        third = commands[i][2] -1
+       # print(first,second,third)
+        tmparr = array[first:second]   #리스트 슬라이싱
+        tmparr.sort()                  
+        answer.append(tmparr[third])
+    return answer
