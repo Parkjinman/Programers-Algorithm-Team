@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+class Solution {
+    public int[] solution(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
+		
+		int count = 0;
+		
+		for(int j=0; j<commands.length; j++) {
+			int first = commands[j][0] - 1;  // 여기부터
+			int second = commands[j][1] - 1; // 여기까지 자름
+			int third = commands[j][2] - 1; // 여기까지 자름
+			
+			int[] emp = new int[commands[j][1] - commands[j][0]+1]; //자른 값을 담을 배열
+			int cnt = 0;
+			//문자열 자르기
+			for(int i=first; i<=second; i++) {
+				emp[cnt] = array[i];
+				cnt++;
+			}
+			
+			//정렬
+			Arrays.sort(emp);
+			
+			//answer에 commands자른 값에 k번째 수 담기
+			answer[count] = emp[third];
+			count++;
+		}
+		
+		return answer;
+    }
+}

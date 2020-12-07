@@ -1,0 +1,48 @@
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        int answer = 0;
+		
+        Queue<Integer> q = new ConcurrentLinkedQueue<>();
+        
+        int sum = 0;
+        
+        //트럭 개수만큼 반복
+        for(int t : truck_weights) {
+            while(true) {
+            	//다리를 지나는 트럭이 없는지 확인하는 조건문
+                if(q.isEmpty()) {
+                	//다리를 지나는 트럭이 없다면 추가
+                	q.add(t);
+                    
+                	//해당 트럭을 무게 sum에 등록
+                    sum += t;
+                    
+                    //1초 증가
+                    answer++;
+                    break;
+                //q의 길이가 다리길이와 같는지 확인
+                } else if(q.size() == bridge_length) {
+                	//다리를 건너는 중인 트럭을 q에서 꺼냄과 동시에 sum에 값을 마이너스 처리
+                    sum -= q.poll();
+                } else {
+                	//[현재 다리를 건너는 중인 트럭의 무게]와 [다음의 건널 트럭의 무게]를 더한 값이 [다리가 견디는 무게]보다 큰지 확인 
+                    if(sum + t > weight) {
+                        answer++;
+                        q.add(0); //다리에 무게로 인해 동시에 건널 트럭이 없다면 0으로 추가
+                    } else {
+                    	//다리가 무게를 견딜 수 있으니 다음에 건널 트럭을 추가
+                        q.add(t);
+                        // 무게도 추가
+                        sum+=t;
+                        answer++;
+                        break;
+                    }
+                }
+            }
+        }
+        return answer + bridge_length;
+    }
+}
