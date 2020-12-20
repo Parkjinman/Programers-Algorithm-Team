@@ -1,0 +1,33 @@
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+class Solution {
+    public int solution(int[] priorities, int location) {
+        int answer = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+ 
+        //중요도 순으로 정렬해서 담기
+        for(int priority : priorities) {
+            pq.offer(priority);
+        }
+ 
+        while(!pq.isEmpty()) {
+            for(int i = 0; i < priorities.length; i++) {
+            	System.out.println(pq.peek());
+            	//poll할 문서의 중요도와 배열에 있는 현재 문서의 중요도가 같은지
+                if(pq.peek() == priorities[i]) {
+                    pq.poll();
+                    answer++;
+                    //내가 요청한 문서의 위치에 도달함
+                    if (location == i) {
+                    	System.out.println(pq);
+                        pq.clear();
+                        break;
+                    }
+                }
+            }
+        }
+ 
+        return answer;
+    }
+}
