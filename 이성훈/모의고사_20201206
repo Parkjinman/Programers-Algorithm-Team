@@ -1,0 +1,25 @@
+#https://programmers.co.kr/learn/courses/30/lessons/42840       
+#모의고사 풀이 : 이성훈
+def solution(answers):
+    #print(answers[2])
+    first = [1, 2, 3, 4, 5]
+    second = [2, 1, 2, 3, 2, 4, 2, 5]
+    third = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+
+    rank = {1 : 0, 2 : 0, 3 : 0}   #순위를 위한 딕셔너리 선언
+    
+    for i in range(len(answers)):
+        if first[i%5] == answers[i]:
+            rank[1] +=1
+        if second[i%8] == answers[i]:
+            rank[2] +=1
+        if third[i%10] == answers[i]:
+            rank[3] +=1
+# 문제의 길이만큼 수포자 123의 답을 대조 △                              
+    maxval = max(rank.values())
+    answer = []
+    for key, value in rank.items():
+        if value == maxval:
+            answer.append(key)
+# 최고득점 수포자를 선별 △
+    return answer
